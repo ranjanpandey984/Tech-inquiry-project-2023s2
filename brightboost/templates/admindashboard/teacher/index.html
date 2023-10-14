@@ -1,0 +1,74 @@
+{% extends "admindashboard/master/index.html" %}
+{% include "flash.html" %} 
+{% block title %}Teachers{% endblock title %}
+{% block content %}
+
+<div class="card m-3">
+   <div class="card-header">
+      <h3 class="card-title col-10"><strong>Teachers List</strong></h3>
+      <a href="{% url "addTeacher" %}" class="col-2 btn btn-success"><i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>Add</a>
+   </div>
+
+   <div class="card-body">
+      <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+         <table id="table1" class="display">
+            <thead>
+               <tr>
+                     <th>S.No</th>
+                     <th>Username</th>
+                     <th>First Name</th>
+                     <th>Last Name</th>
+                     <th>Email</th>
+                     <th>Date Joined</th>
+                     <th>Operations</th>
+               </tr>
+            </thead>
+            <tbody>
+               {%for teacher in teachers %}
+               <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td>{{ teacher.username }}</td>
+                     <td>{{ teacher.first_name }}</td>
+                     <td>{{ teacher.last_name }}</td>
+                     <td>{{ teacher.email }}</td>
+                     <td>{{ teacher.date_joined }}</td>
+                     <td><a href="{% url 'editTeacher' teacher.id %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'deleteTeacher' teacher.id %}" id="delete" class="btn btn-danger">Delete</a></td>
+                    
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+{% endblock content %}
+
+
+{% block scripts %}
+   <script>
+      $(function() {
+         $(document).on('click', '#delete', function(e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+            Swal.fire({
+               title: 'Are you sure?',
+               text: "Delete It!",
+               icon: 'warning',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+               if (result.isConfirmed) {
+                     window.location.href = link;
+               }
+            })
+         });
+      });
+   </script>
+
+
+
+{% endblock scripts %}
+

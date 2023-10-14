@@ -1,7 +1,7 @@
 {% load static %}
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
    <!-- Brand Logo -->
-   <a href="index3.html" class="brand-link text-center">
+   <a href="{% url 'admindashboard' %}" class="brand-link text-center">
       {% comment %}
       <img
          src="{% static 'dist/img/AdminLTELogo.png' %}"
@@ -27,7 +27,7 @@
          </div>
          {% endcomment %}
          <div class="info">
-            <a href="#" class="d-block text-lg"><strong>Dashboard</strong></a>
+            <a href="{% url 'admindashboard' %}" class="d-block text-lg"><strong>Dashboard</strong></a>
          </div>
       </div>
 
@@ -40,8 +40,17 @@
             data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
+            <li class="nav-item">
+               <a href="{% url 'teacher' %}" class="nav-link {% if request.path == '/adminsite/teacher' %} active {% endif %}">
+                  <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                  <p>
+                     Teachers
+                  </p>
+               </a>
+            </li>
+
             <li class="nav-item menu-open">
-               <a href="#" class="nav-link active">
+               <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                      admin
@@ -69,15 +78,7 @@
                   </li>
                </ul>
             </li>
-            <li class="nav-item">
-               <a href="pages/widgets.html" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>
-                     Widgets
-                     <span class="right badge badge-danger">New</span>
-                  </p>
-               </a>
-            </li>
+            
 
             <li class="nav-header">EXAMPLES</li>
          </ul>
