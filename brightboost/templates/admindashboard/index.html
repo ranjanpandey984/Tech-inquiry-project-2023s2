@@ -14,9 +14,9 @@
                <p>Students</p>
              </div>
              <div class="icon">
-               <i class="ion ion-bag"></i>
+              <i class="ion ion-person-add"></i>
              </div>
-             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a href="{% url 'student' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
            </div>
          </div>
          <!-- ./col -->
@@ -29,9 +29,9 @@
                <p>Teachers</p>
              </div>
              <div class="icon">
-               <i class="ion ion-stats-bars"></i>
+              <i class="fa fa-users" aria-hidden="true"></i>
              </div>
-             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a href="{% url 'teacher' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
            </div>
          </div>
          <!-- ./col -->
@@ -39,14 +39,14 @@
            <!-- small box -->
            <div class="small-box bg-warning">
              <div class="inner">
-               <h3>44</h3>
+               <h3>{{ sessions }}</h3>
 
-               <p>Sessions</p>
+               <p>Timetable</p>
              </div>
              <div class="icon">
-               <i class="ion ion-person-add"></i>
+              <i class="fa fa-calendar" aria-hidden="true"></i>
              </div>
-             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a href="{% url 'session' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
            </div>
          </div>
          <!-- ./col -->
@@ -54,14 +54,14 @@
            <!-- small box -->
            <div class="small-box bg-danger">
              <div class="inner">
-               <h3>65</h3>
+               <h3>{{questions}}</h3>
 
                <p>Questions</p>
              </div>
              <div class="icon">
-               <i class="ion ion-pie-graph"></i>
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
              </div>
-             <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+             <a href="{% url 'question' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
            </div>
          </div>
          <!-- ./col -->

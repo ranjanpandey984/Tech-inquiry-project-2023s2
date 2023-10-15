@@ -1,0 +1,38 @@
+{% extends "admindashboard/master/index.html" %}
+{% block title %}Rooms{% endblock title %}
+{% block content %}
+
+<div class="card m-3">
+   <div class="card-header">
+      <h3 class="card-title col-10"><strong>Rooms List</strong></h3>
+      <a href="{% url "addRoom" %}" class="col-2 btn btn-success"><i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>Add</a>
+   </div>
+
+   <div class="card-body">
+      <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+         <table id="table1" class="display">
+            <thead>
+               <tr>
+                     <th>S.No</th>
+                     <th>Room No</th>
+                     <th>Building</th>
+                     <th>Operations</th>
+               </tr>
+            </thead>
+            <tbody>
+               {%for room in rooms %}
+               <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td>{{ room.room_no }}</td>
+                     <td>{{ room.building }}</td>
+                     <td><a href="{% url 'editRoom' room.id %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'deleteRoom' room.id %}" id="delete" class="btn btn-danger">Delete</a></td>    
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+{% endblock content %}
+

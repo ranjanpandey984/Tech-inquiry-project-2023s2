@@ -1,0 +1,41 @@
+{% extends "admindashboard/master/index.html" %}
+{% block title %}Subjects{% endblock title %}
+{% block content %}
+
+<div class="card m-3">
+   <div class="card-header">
+      <h3 class="card-title col-10"><strong>Subjects List</strong></h3>
+      <a href="{% url "addSubject" %}" class="col-2 btn btn-success"><i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>Add</a>
+   </div>
+
+   <div class="card-body">
+      <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+         <table id="table1" class="display">
+            <thead>
+               <tr>
+                     <th>S.No</th>
+                     <th>Subject Name</th>
+                     <th>Operations</th>
+               </tr>
+            </thead>
+            <tbody>
+               {%for subject in subjects %}
+               <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td>{{ subject.subject_name }}</td>
+                     <td><a href="{% url 'editSubject' subject.id %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'deleteSubject' subject.id %}" id="delete" class="btn btn-danger">Delete</a></td>    
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+{% endblock content %}
+
+
+{% comment %} {% block scripts %}
+   
+{% endblock scripts %}
+ {% endcomment %}

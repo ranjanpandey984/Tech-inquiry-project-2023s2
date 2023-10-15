@@ -1,0 +1,51 @@
+{% extends "admindashboard/master/index.html" %}
+
+{% block title %}Edit Session{% endblock title %}
+{% block content %}
+<form class="col-6 mx-auto card p-4 shadow-lg" method="POST">
+    {% csrf_token %}
+    <strong class="text-center text-lg">Edit Session</strong>
+    <hr>
+    <div class="form-group">
+        <label for="sessiondate">Date</label>
+        <input type="date" class="form-control" value="{{ session.session_date|date:"Y-m-d" }}" name="sessiondate" id="sessiondate" placeholder="Enter Date">
+    </div>
+    <div class="form-group">
+        <label for="starttime">Start Time</label>
+        <input type="time" class="form-control" value="{{ session.start_time|time:'H:i' }}" name="starttime" id="starttime" placeholder="Enter Start Time">
+    </div>
+    <div class="form-group">
+        <label for="endtime">End Time</label>
+        <input type="time" class="form-control" value="{{ session.end_time|time:'H:i' }}" name="endtime" id="endtime" placeholder="Enter End Time">
+    </div>
+    <div class="form-group">
+        <label for="subject">Subject</label>
+        <select name="subject" id="subject" class="form-control">
+            {% for subject in  subjects %}
+                <option value="{{ subject.id }}" {% if session.subject_id.id == subject.id %} selected {%endif%}>{{subject.subject_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="teacher">Teacher</label>
+        <select name="teacher" id="teacher" class="form-control">
+            {% for teacher in  teachers%}
+                <option value="{{ teacher.id }}" {% if session.teacher_id.id == teacher.id %} selected {%endif%}>{{teacher.first_name}} {{teacher.last_name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="room">Room</label>  
+        <select name="room" id="room" class="form-control">
+            {% for room in  rooms%}
+                <option value="{{ room.id }}" {% if session.room_id.id == room.id %} selected {%endif%}>{{ room.building }} - {{room.room_no}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+
+
+
+{% endblock content %}
+

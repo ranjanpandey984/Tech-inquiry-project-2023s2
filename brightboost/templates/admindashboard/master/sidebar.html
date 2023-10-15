@@ -39,9 +39,9 @@
             role="menu"
             data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-       with font-awesome or any other icon font library -->
+            with font-awesome or any other icon font library -->
             <li class="nav-item">
-               <a href="{% url 'teacher' %}" class="nav-link {% if request.path == '/adminsite/teacher' %} active {% endif %}">
+               <a href="{% url 'teacher' %}" class="nav-link {% if request.path|slice:":18" == '/adminsite/teacher' %} active {% endif %}">
                   <i class="fa fa-user mr-2" aria-hidden="true"></i>
                   <p>
                      Teachers
@@ -49,7 +49,50 @@
                </a>
             </li>
 
-            <li class="nav-item menu-open">
+            <li class="nav-item">
+               <a href="{% url 'student' %}" class="nav-link {% if request.path|slice:":18" == '/adminsite/student' %} active {% endif %}">
+                  <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                  <p>
+                     Students
+                  </p>
+               </a>
+            </li>
+
+            <li class="nav-item">
+               <a href="{% url 'room' %}" class="nav-link {% if request.path|slice:":18" == '/adminsite/room' %} active {% endif %}">
+                  <i class="fa fa-building mr-2" aria-hidden="true"></i>
+                  <p>
+                     Rooms
+                  </p>
+               </a>
+            </li>
+
+            <li class="nav-item">
+               <a href="{% url 'subject' %}" class="nav-link {% if request.path|slice:":18" == '/adminsite/subject' %} active {% endif %}">
+                  <i class="fa fa-book mr-2" aria-hidden="true"></i>
+                  <p>
+                     Subjects
+                  </p>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a href="{% url 'session' %}" class="nav-link {% if request.path|slice:":18" == '/adminsite/session' %} active {% endif %}">
+                  <i class="fa fa-calendar mr-2" aria-hidden="true"></i>
+                  <p>
+                     Timetable
+                  </p>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a href="{% url 'question' %}" class="nav-link {% if request.path|slice:":19" == '/adminsite/question' %} active {% endif %}">
+                  <i class="fa fa-question-circle mr-2" aria-hidden="true"></i>
+                  <p>
+                     Questions
+                  </p>
+               </a>
+            </li>
+            
+            {% comment %} <li class="nav-item menu-open">
                <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
@@ -80,7 +123,7 @@
             </li>
             
 
-            <li class="nav-header">EXAMPLES</li>
+            <li class="nav-header">EXAMPLES</li> {% endcomment %}
          </ul>
       </nav>
       <!-- /.sidebar-menu -->

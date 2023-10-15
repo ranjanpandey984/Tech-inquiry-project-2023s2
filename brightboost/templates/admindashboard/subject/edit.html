@@ -1,0 +1,19 @@
+{% extends "admindashboard/master/index.html" %}
+
+{% block title %}Edit Subject{% endblock title %}
+{% block content %}
+<form class="col-6 mx-auto card p-4 shadow-lg" method="POST">
+    {% csrf_token %}
+    <strong class="text-center text-lg">Edit Subject</strong>
+    <hr>
+    <div class="form-group">
+        <label for="subjectname">Subject Name</label>
+        <input type="text" class="form-control" value="{{ subject.subject_name }}" name="subjectname" id="subjectname" placeholder="Enter Subject Name">
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+
+
+
+{% endblock content %}
+

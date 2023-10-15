@@ -1,0 +1,55 @@
+{% extends "admindashboard/master/index.html" %}
+{% block title %}Timetable{% endblock title %}
+{% block content %}
+
+<div class="card m-3">
+   <div class="card-header">
+      <h3 class="card-title col-10"><strong>Timetable List</strong></h3>
+      <a href="{% url "addSession" %}" class="col-2 btn btn-success"><i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>Add</a>
+   </div>
+
+   <div class="card-body">
+      <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+         <table id="table1" class="display">
+            <thead>
+               <tr>
+                     <th>S.No</th>
+                     <th>Date</th>
+                     <th>Start Time</th>
+                     <th>End Time</th>
+                     <th>Subject</th>
+                     <th>Teacher</th>
+                     <th>Room</th>
+                     <th>Attendance Count</th>
+                     <th>Question Answered</th>
+                     <th>Operations</th>
+               </tr>
+            </thead>
+            <tbody>
+               {%for session in sessions %}
+               <tr>
+                     <td>{{ forloop.counter }}</td>
+                     <td>{{ session.session_date }}</td>
+                     <td>{{ session.start_time }}</td>
+                     <td>{{ session.end_time }}</td>
+                     <td>{{ session.subject_id.subject_name }}</td>
+                     <td>{{ session.teacher_id.first_name }} {{ session.teacher_id.last_name }}</td>
+                     <td>{{ session.room_id.building }} - {{ session.room_id.room_no }} </td>
+                     <td>{{ session.attendance_count }}</td>
+                     <td>{{ session.question_answered }}</td>
+                     <td><a href="{% url 'editSession' session.id %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'deleteSession' session.id %}" id="delete" class="btn btn-danger">Delete</a></td>    
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+{% endblock content %}
+
+
+{% comment %} {% block scripts %}
+   
+{% endblock scripts %}
+ {% endcomment %}

@@ -1,10 +1,10 @@
 {% extends "admindashboard/master/index.html" %}
-{% block title %}Add Teacher{% endblock title %}
+{% block title %}Add Student{% endblock title %}
 
 {% block content %}
 <form class="col-6 mx-auto card p-4 shadow-lg" method="POST">
     {% csrf_token %}
-    <strong class="text-center text-lg">Add Teacher</strong>
+    <strong class="text-center text-lg">Add Student</strong>
     <hr>
     <div class="form-group">
       <label for="firstname">First Name</label>
