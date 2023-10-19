@@ -1,0 +1,58 @@
+{% extends "tutordashboard/master/index.html" %}
+
+{% block title %}Replies{% endblock title %}
+{% block content %}
+<div class="col-md-12">
+   <div class="card card-widget">
+      <div class="card-header">
+         <div class="user-block">
+            <span class="username m-0">{{ question.user_id.get_full_name}}</span>
+            <span class="description m-0">Shared publicly - {{ question.start_time }}</span>
+         </div>
+      </div>
+      <div class="card-body">
+         <strong>
+            {{question.question}}
+         </strong>  
+      </div>
+
+      <div class="card-footer card-comments">
+         {% for reply in replies %}
+            <div class="card-comment">
+               <div class="comment-text m-0 row">
+                  <div class="col-10">
+                     <span class="username">
+                        {{ reply.teacher_id.get_full_name }}
+                        <span class="text-muted float-right">{{ reply.replied_on }}</span>
+                        <br>
+                        <span class="text-muted float-right"><strong>Time Taken To Reply: {{ reply.time_taken }}</strong></span>
+                     </span>
+                     {{reply.reply}}
+                  </div>
+                  <div class="col-2">
+                     {%if reply.teacher_id.id == request.user.id %}
+                        <a href="{% url 'tutorEditReply' reply.id %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'tutorDeleteReply' reply.id %}" id="delete" class="btn btn-danger">Delete</a>   
+                     {%endif%}
+                  </div>
+              </div>
+            </div>
+         {% endfor %}
+      </div>
+
+      <div class="card-footer">
+         <form method="POST">
+            {% csrf_token %}
+            <div class="img-push">
+               <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  name="reply"
+                  id="reply"
+                  placeholder="Press enter to post reply" />
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+{% endblock content %}

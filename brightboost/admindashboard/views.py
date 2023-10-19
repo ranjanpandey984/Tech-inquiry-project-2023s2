@@ -9,8 +9,10 @@ from bbapp.models import *
 
 @login_required
 def admindashboard(request):
-    students = User.objects.filter(is_staff=False).count()
-    teachers = User.objects.filter(is_staff=True).count()
+    students = User.objects.filter(is_staff=False).exclude(
+        username="admin").exclude(is_superuser=True).count()
+    teachers = User.objects.filter(is_staff=True).exclude(
+        username="admin").exclude(is_superuser=True).count()
     sessions = Session.objects.count()
     questions = Question.objects.count()
     context = {
@@ -417,8 +419,8 @@ def reply(request, id):
             session.question_answered += 1
             session.save()
 
-        # question.end_time = timezone.now()
-        # question.save()
+        question.end_time = timezone.now()
+        question.save()
         time_taken = question.end_time - question.start_time
         newreply.time_taken = time_taken
         newreply.save()

@@ -1,0 +1,20 @@
+{% extends "tutordashboard/master/index.html" %}
+
+{% block title %}Add My Subject{% endblock title %}
+
+{% block content %}
+<form class="col-6 mx-auto card p-4 shadow-lg" method="POST">
+    {% csrf_token %}
+    <strong class="text-center text-lg">Add My Subject</strong>
+    <hr>
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <select name="subject" id="subject" class="form-control">
+        {% for subject in  subjects %}
+          <option value="{{ subject.id }}">{{subject.subject_name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+{% endblock content %}

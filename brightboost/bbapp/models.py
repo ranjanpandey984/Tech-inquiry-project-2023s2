@@ -21,6 +21,7 @@ from django.utils import timezone
 
 class Subject(models.Model):
     subject_name = models.CharField(max_length=100)
+    user_id = models.ManyToManyField(User, default=None)
 
     def __str__(self):
         return self.subject_name
@@ -55,6 +56,7 @@ class Question(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     session_id = models.ForeignKey(
         Session, null=True, on_delete=models.CASCADE)
+    is_replied = models.BooleanField(default=False)
 
     def __str__(self):
         return self.question

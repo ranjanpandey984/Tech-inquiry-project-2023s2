@@ -1,0 +1,16 @@
+{% extends "tutordashboard/master/index.html" %}
+{% block title %}Edit Reply{% endblock title %}
+
+{% block content %}
+<form class="col-6 mx-auto card p-4 shadow-lg" method="POST">
+    {% csrf_token %}
+    <strong class="text-center text-lg">Edit Reply</strong>
+    <hr>
+    <div class="form-group">
+      <label for="reply">Reply</label>
+      <textarea class="form-control" name="reply" id="reply" cols="30" rows="5" placeholder="Enter Reply">{{ reply.reply }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </form>
+{% endblock content %}
+

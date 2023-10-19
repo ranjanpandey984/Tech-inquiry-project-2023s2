@@ -44,6 +44,9 @@
       <link
          rel="stylesheet"
          href="{% static 'plugins/summernote/summernote-bs4.min.css' %} " />
+
+      <!--ToastR-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
    </head>
    <body class="hold-transition sidebar-mini layout-fixed">
       <div class="wrapper">
@@ -55,7 +58,20 @@
 
          <!-- Content Wrapper. Contains page content -->
          <div class="content-wrapper">
-            {% block content %}my name{% endblock content %}
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+               <div class="container-fluid">
+                  <div class="row mb-2">
+                     <div class="col-sm-6">
+                        <h1 class="m-0">{% block title %}{% endblock title %}</h1>
+                     </div>
+                     <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+               </div>
+               <!-- /.container-fluid -->
+            </div>
+            {% block content %}{% endblock content %}
          </div>
          <!-- /.content-wrapper -->
 
@@ -102,5 +118,89 @@
       <script src="{% static 'dist/js/demo.js' %}"></script>
       <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
       <script src="{% static 'dist/js/pages/dashboard.js' %}"></script>
+
+      <!-- Links for SweetAlert JS  --> 
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      
+      
+      <!-- Links for Toast Alert  --> 
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+      <!-- Links for DataTables --> 
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+      <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+
+      <script>
+         $(document).ready(function() {
+             $('#table1').DataTable({
+                 dom: 'Bfrtip',
+                 buttons: [{
+                         extend: 'excelHtml5',
+                         title: "My Total Posts Report",
+                         exportOptions: {
+                             columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                         }
+                     },
+                     {
+                         extend: 'pdfHtml5',
+                         title: "My Total Posts Report",
+                         exportOptions: {
+                             columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                         }
+                     },
+                     {
+                         extend: 'print',
+                         footer: 'true',
+                         title: "Gharbaar Properties Report",
+                         autoPrint: 'false',
+                         exportOptions: {
+                             columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                         }
+                     }
+ 
+                 ]
+             });
+         });
+     </script>
+
+     <script>
+      $(function() {
+         $(document).on('click', '#delete', function(e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+            Swal.fire({
+               title: 'Are you sure?',
+               text: "Delete It!",
+               icon: 'warning',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+               if (result.isConfirmed) {
+                     window.location.href = link;
+               }
+            })
+         });
+      });
+      </script>
+
+
+      {% if messages %}
+         {% for message in messages %}
+            {% if message.tags == 'success'%}
+                  <script type="text/javascript">toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'info' %}
+                  <script type="text/javascript">toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'warning' %}
+                  <script type="text/javascript">toastr.{{ message.tags }}('{{ message }}')</script>
+            {% elif message.tags == 'error' %}
+                  <script type="text/javascript">toastr.{{ message.tags }}('{{ message }}')</script>
+            {% endif %}
+         {% endfor %}
+      {% endif %}
+      
+     {% block scripts %}{% endblock scripts %}
    </body>
 </html>
