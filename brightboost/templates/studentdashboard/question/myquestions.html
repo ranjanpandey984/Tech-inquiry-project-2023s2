@@ -1,0 +1,55 @@
+{% extends "studentdashboard/master/index.html" %}
+{% block title %}My Questions{% endblock title %} 
+{% block content %}
+<div class="m-3">
+   <div class="card card-primary card-outline">
+      <div class="card-header">
+         <h3 class="card-title col-10">My Questions List</h3>
+         <th><a href="{% url "studentAddQuestion" %}" class="col-2 btn btn-success"><i class="fa fa-plus-circle mr-2" aria-hidden="true"></i>Add</a> </th>
+         
+      </div>
+
+      <div class="card-body p-0">
+         <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-striped">
+               <thead>
+                  <tr>
+                     <th>S.No</th>
+                     <th>Username</th>
+                     <th>Full Name</th>
+                     <th>Question</th>
+                     <th>Session</th>
+                     <th>Date Asked</th>
+                     <th>Operations</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for question in  questions %}
+                     <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td class="mailbox-name">
+                           <strong>{{ question.user_id.username }}</strong>
+                        </td>
+                        <td class="mailbox-name">
+                           <strong>{{ question.user_id.get_full_name }}</strong>
+                        </td>
+                        <td class="mailbox-subject">
+                           <strong><a href="{% url 'studentReply' question.id %}">{{question.question}}</a></strong>
+                        </td>
+                        <td class="mailbox-date">{{ question.session_id }}</td>
+                        <td class="mailbox-date">{{ question.start_time }}</td>
+                        {% if question.user_id.id == request.user.id %}
+                           <td><a href="{% url 'studentEditQuestion' question.id %}" class="btn btn-warning">Edit</a>
+                               <a href="{% url 'studentDeleteQuestion' question.id %}" id="delete" class="btn btn-danger">Delete</a></td>
+                        {% elif question.is_replied == True %}
+                              <td><button class="btn btn-secondary">Replied</button></td>
+                        {% endif %}  
+                     </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock content %}

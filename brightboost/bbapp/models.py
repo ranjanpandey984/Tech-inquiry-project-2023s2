@@ -44,6 +44,8 @@ class Session(models.Model):
     subject_id = models.ForeignKey(Subject, on_delete=models.CASCADE)
     teacher_id = models.ForeignKey(User, on_delete=models.CASCADE)
     room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    student = models.ManyToManyField(
+        User, related_name='students', default=None)
 
     def __str__(self):
         return f"{self.session_date} {self.start_time}"

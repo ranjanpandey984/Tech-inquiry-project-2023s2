@@ -1,22 +1,56 @@
-{% extends "tutordashboard/master/index.html" %} {% block content %}
-<!-- Content Header (Page header) -->
-<div class="content-header">
-   <div class="container-fluid">
-      <div class="row mb-2">
-         <div class="col-sm-6">
-            <h1 class="m-0">tutor Dashboard</h1>
-         </div>
-         <!-- /.col -->
-      </div>
-      <!-- /.row -->
-   </div>
-   <!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
+{% extends "tutordashboard/master/index.html" %}
+{% block title %}Tutor dashboard{% endblock title %}
 
+{% block content %}
 <!-- Main content -->
 <section class="content">
-   <div class="container-fluid"></div>
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col-lg-3 col-6">
+           <!-- small box -->
+           <div class="small-box bg-info">
+             <div class="inner">
+               <h3>{{ mysubjects }}</h3>
+               <p>My Subjects</p>
+             </div>
+             <div class="icon">
+               <i class="fa fa-book mr-2" aria-hidden="true"></i>
+             </div>
+             <a href="{% url 'mySubject' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+           </div>
+         </div>
+         <div class="col-lg-3 col-6">
+           <!-- small box -->
+           <div class="small-box bg-warning">
+             <div class="inner">
+               <h3>{{ sessions }}</h3>
+
+               <p>Timetable</p>
+             </div>
+             <div class="icon">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+             </div>
+             <a href="{% url 'tutorSession' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+           </div>
+         </div>
+         <!-- ./col -->
+         <div class="col-lg-3 col-6">
+           <!-- small box -->
+           <div class="small-box bg-danger">
+             <div class="inner">
+               <h3>{{questions}}</h3>
+
+               <p>Questions</p>
+             </div>
+             <div class="icon">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+             </div>
+             <a href="{% url 'tutorQuestion' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+           </div>
+         </div>
+         <!-- ./col -->
+       </div>
+   </div>
    <!-- /.container-fluid -->
 </section>
 <!-- /.content -->

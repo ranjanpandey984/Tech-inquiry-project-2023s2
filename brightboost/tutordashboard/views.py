@@ -6,23 +6,17 @@ from bbapp.models import *
 # Create your views here.
 
 
-def tutordashboard(request):
-    return render(request, 'tutordashboard/index.html')
-
-
 @login_required
-def adminDashboard(request):
-    students = User.objects.filter(is_staff=False).count()
-    teachers = User.objects.filter(is_staff=True).count()
+def tutordashboard(request):
+    mysubjects = Subject.objects.filter(user_id=request.user.id).count()
     sessions = Session.objects.count()
-    questions = Question.objects.count()
+    questions = Question.objects.exclude(user_id=request.user.id).count()
     context = {
-        "students": students,
-        "teachers": teachers,
         "sessions": sessions,
-        "questions": questions
+        "questions": questions,
+        "mysubjects": mysubjects
     }
-    return render(request, 'admindashboard/index.html', context)
+    return render(request, 'tutordashboard/index.html', context)
 
 
 @login_required
